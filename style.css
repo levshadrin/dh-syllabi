@@ -1,0 +1,61 @@
+.title {
+  font-size: 1.5em !important;
+  padding: 0.5em;
+}
+
+.subtitle {
+  padding-bottom: 1em;
+}
+
+.quarto-title-author-name {
+  font-size: 0.7em !important;
+}
+
+.quarto-title-affiliation {
+  font-size: 0.5em !important;
+}
+
+.date {
+  font-size: 0.5em !important;
+}
+
+.reveal h2 {
+  font-family: Sans-Serif !important;
+}
+
+:root {
+  --r-selection-background-color: aqua;
+  --r-heading-font: Sans-Serif;
+}
+
+.reveal table {
+  border-collapse: collapse;
+  font-size: .4em;
+  font-family: Sans-Serif;
+  color: aqua;
+}
+.reveal table th {
+  background-color: #00778F;
+}
+.reveal table tr:nth-child(even) {
+  background-color: #004452;
+}
+.reveal table tr:hover {
+  background-color: #00667A;
+}
+.reveal table td {
+  max-width: 1000px;
+  overflow: hidden;
+  padding: .5em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.narrow_col_table table td {
+  max-width: 500px;
+}
+
+.reveal aside {
+  font-size: 0.5em;
+  text-align: center !important;
+}
