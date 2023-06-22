@@ -24,10 +24,10 @@ css: style.css
 
 ## Практика {.smaller}
 
-- исследовательская практика в ИТМО
-- командная работа вместе с Мариной Настас и Марией Масловой
-- консультации с Полиной Колозариди и исследовательницами Гильдии ИТМО 'DH в России'
-- несколько областей работы на выбор -> решили работать с силлабусами
+-   исследовательская практика в ИТМО
+-   командная работа вместе с Мариной Настас и Марией Масловой
+-   консультации с Полиной Колозариди и исследовательницами Гильдии ИТМО 'DH в России'
+-   несколько областей работы на выбор -\> решили работать с силлабусами
 
 ![Таймлайн спринта по сбору и анализу силлабусов](images/DH_ITMO_syllabi_sprint.svg)
 
@@ -35,19 +35,19 @@ css: style.css
 
 ::: columns
 ::: {.column width="65%"}
-![MSCW спринта](images/DH_ITMO_MSCW.svg){fig-align='left'}
+![MSCW спринта](images/DH_ITMO_MSCW.svg){fig-align="left"}
 :::
 
 ::: {.column width="35%"}
-- этапы:
-  + проверка списка DH-программ
-  + скрейпинг текстов с сайтов программ
-  + сбор данных в общую таблицу
-  + проверка данных
-- анализ
-  + wordclouds
-  + topic modeling
-  + граф коллокации дисциплин
+-   этапы:
+    -   проверка списка DH-программ
+    -   скрейпинг текстов с сайтов программ
+    -   сбор данных в общую таблицу
+    -   проверка данных
+-   анализ
+    -   wordclouds
+    -   topic modeling
+    -   граф коллокации дисциплин
 :::
 :::
 
@@ -65,46 +65,42 @@ df_prog %>%
   kbl() %>% 
   kable_styling()
 ```
-::: footer
+
+::: aside
 Общую таблицу собирали Лев Шадрин, Марина Настас и Мария Маслова
 :::
 
-## {.smaller data-menu-title='Количество DH-программ'}
+##  {.smaller data-menu-title="Количество DH-программ"}
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
-
 df_disc <- read_tsv("data/dh_disciplines.tsv")
 df_disc %>%
   count(institution) %>% 
   drop_na() %>% 
   arrange(desc(n)) %>% 
   ggplot(aes(x = '', y = n, fill = factor(n))) +
-    geom_col(color = 'black', linewidth = 0.1) +
-    coord_polar(theta = "y") +
-    geom_text(aes(x = 1.6, label = scales::percent(n/sum(n))),
-              position = position_stack(vjust = 0.5)) +
-    scale_fill_discrete(labels = c('одна программа (n=5)',
-                                   'две программы (n=3)',
-                                   'три программы (n=1)')) +
-    theme_bw() +
-    theme(axis.text = element_blank(),
-          axis.ticks = element_blank(),
-          panel.grid  = element_blank()) +
-    labs(fill = 'Количество DH-программ в ВУЗе',
-         x = '',
-         y = '')
+  geom_col(color = 'black', linewidth = 0.1) +
+  coord_polar(theta = "y", clip = 'on') +
+  geom_text(aes(x = 1.6, label = scales::percent(n/sum(n))),
+            position = position_stack(vjust = 0.5)) +
+  scale_fill_discrete(labels = c('одна программа (n=5)',
+                                 'две программы (n=3)',
+                                 'три программы (n=1)')) +
+  theme_void() +
+  labs(fill = 'Количество DH-программ в ВУЗе',
+       x = '',
+       y = '')
 ```
 
 ::: aside
 Распределение количества DH-программ по ВУЗам
 :::
 
-## {.smaller data-menu-title='Бакалавриат / магистратура'}
+##  {.smaller data-menu-title="Бакалавриат / магистратура"}
 
-::: {.r-stretch}
 ```{r}
 #| echo: false
 #| message: false
@@ -120,15 +116,11 @@ df_prog %>%
                                        paste(count, 'программ'))),
             position = position_stack(vjust = 0.5)) +
   scale_fill_discrete(labels = c('магистратура', 'бакалавриат')) +
-  theme_bw() +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid  = element_blank()) +
+  theme_void() +
   labs(fill = 'Ступень образования',
        x = '',
        y = '')
 ```
-:::
 
 ::: aside
 Распределение DH-программ относительно ступени образования
@@ -145,11 +137,12 @@ df_disc %>%
   kbl() %>% 
   kable_styling()
 ```
-::: footer
+
+::: aside
 Таблицу дисциплин модифицировала Марина Настас
 :::
 
-## {.narrow_col_table .scrollable data-menu-title='Дисциплины на примере одной программы'}
+##  {.narrow_col_table .scrollable data-menu-title="Дисциплины на примере одной программы"}
 
 Пример: "Историческая информатика" в МГУ
 
@@ -175,39 +168,43 @@ df_disc_norm %>%
   kable_styling()
 ```
 
-<!-- ## {background-iframe='https://marinanastas.github.io/DH-disciplines-graph/' background-interactive='true' data-menu-title='Общий граф дисциплин'} -->
+# Графы дисциплин
 
-<!-- ::: {.absolute left=0 bottom=-10 style='background-color: #00272F; width: auto; font-size: small; padding: 5px; border-radius: 3px;'} -->
-<!-- https://marinanastas.github.io/DH-disciplines-graph/ -->
-<!-- ::: -->
+## {background-iframe='https://marinanastas.github.io/DH-disciplines-graph/' background-interactive='true' data-menu-title='Общий граф дисциплин'}
 
-## {data-menu-title='Кластер дисциплин 1'}
+::: {.absolute left=0 bottom=-10 style='background-color: #00272F; width: auto; font-size: small; padding: 5px; border-radius: 3px;'}
 
-![](images/cluster_1.svg){fig-align='center'}
+https://marinanastas.github.io/DH-disciplines-graph/
+
+:::
+
+##  {data-menu-title="Кластер дисциплин 1"}
+
+![](images/cluster_1.svg){fig-align="center"}
 
 ::: aside
 Кластеры дисциплин построены в *Cytoscape* при помощи алгоритма [*GLay community clustering*](https://networkx.guide/algorithms/community-detection/girvan-newman/)
 :::
 
-## {data-menu-title='Кластер дисциплин 2'}
+##  {data-menu-title="Кластер дисциплин 2"}
 
-![](images/cluster_2.svg){fig-align='center'}
+![](images/cluster_2.svg){fig-align="center"}
 
 ::: aside
 Базовый граф построен на основе таблицы нормализованных дисциплин
 :::
 
-## {data-menu-title='Кластер дисциплин 3'}
+##  {data-menu-title="Кластер дисциплин 3"}
 
-![](images/cluster_3.svg){fig-align='center'}
+![](images/cluster_3.svg){fig-align="center"}
 
 ::: aside
 В некоторых случаях алгоритм автоматически выдаёт визуально читаемую кластеризацию
 :::
 
-## {data-menu-title='Кластер дисциплин 4'}
+##  {data-menu-title="Кластер дисциплин 4"}
 
-![](images/cluster_4.svg){fig-align='center'}
+![](images/cluster_4.svg){fig-align="center"}
 
 ::: aside
 В остальных случаях необходима дополнительная настройка параметров визаулизации
@@ -215,37 +212,37 @@ df_disc_norm %>%
 
 ## Челленджи {.smaller}
 
-* вопросы к данным:
-  + выборка? список DH-программ?
-  + что мы понимаем как "силлабус"?
-    - описания на сайтах - не силлабусы
-* вопросы к методам:
-  + как мы применяем инструменты для анализа?
-    - коллокация дисциплин?
-  + вмешательство в данные?
-    - стоп-слова
-    - нормализация дисциплин
-    
+-   вопросы к данным:
+    -   выборка? список DH-программ?
+    -   что мы понимаем как "силлабус"?
+        -   описания на сайтах - не силлабусы
+-   вопросы к методам:
+    -   как мы применяем инструменты для анализа?
+        -   коллокация дисциплин?
+    -   вмешательство в данные?
+        -   стоп-слова
+        -   нормализация дисциплин
+
 Ощущался недостаток теоретической базы, фидбека, референсов
 
 # Второй датасет
 
 ## Силлабус {.smaller}
 
->(...) документ, содержащий основные характеристики изучаемого курса или краткое описание целого образовательного модуля.[^1]
+> (...) документ, содержащий основные характеристики изучаемого курса или краткое описание целого образовательного модуля.[^1]
 
-- применение в Российской образовательной сфере?
-- РПД (рабочая программа дисциплины)
-- минимальные формальные критерии:
-  + описание дисциплины
-  + состав курсов
-  + описание курсов
+[^1]: С.Н. Каштанова, В.А. Кудрявцев, "Силлабус Как Инструмент Регулирования Учебной Деятельности Студентов"
 
-[^1]: С.Н. Каштанова, В.А. Кудрявцев, “Силлабус Как Инструмент Регулирования Учебной Деятельности Студентов”
+-   применение в Российской образовательной сфере?
+-   РПД (рабочая программа дисциплины)
+-   минимальные формальные критерии:
+    -   описание дисциплины
+    -   состав курсов
+    -   описание курсов
 
 ## Датасет силлабусов
 
-``` {r}
+```{r}
 df_syll <- read_csv('data/dh_syllabi.csv')
 df_syll %>% 
   select(-1) %>% 
@@ -256,59 +253,63 @@ df_syll %>%
 
 ## Челленджи {.smaller}
 
-* структура файлов РПД
-  - индивидуальные *pdf* для каждой дисциплины
-  - сводный файл для всей программы
-  - сложность парсинга *pdf*
-* категоризация данных
-  - списки дисциплин
-  - библиография
-  - NER?
+-   структура файлов РПД
+    -   индивидуальные *pdf* для каждой дисциплины
+    -   сводный файл для всей программы
+    -   сложность парсинга *pdf*
+-   категоризация данных
+    -   списки дисциплин
+    -   библиография
+    -   NER?
 
 ## Мимесис {.smaller}
+
 Схожие исследования, поиск референсов
 
-* Kleymann et al. "Conceptual Forays: A Corpus-Based Study of ‘Theory’ in Digital Humanities Journals"
-  - составление "словаря" теорий для последуещей классификации
-  - эвристически сопоставимо с тем, что мы называли 'нормализацией' дисциплин
-* Kaupp et al. ["Mapping Cultures in the Big Tent: Multidisciplinary Networks in the Digital Humanities Quarterly"](https://jkaupp.github.io/DHQ/){preview-link='true'}
+-   Kleymann et al. "Conceptual Forays: A Corpus-Based Study of 'Theory' in Digital Humanities Journals"
+    -   составление "словаря" теорий для последуещей классификации
+    -   эвристически сопоставимо с тем, что мы называли 'нормализацией' дисциплин
+-   Kaupp et al. ["Mapping Cultures in the Big Tent: Multidisciplinary Networks in the Digital Humanities Quarterly"](https://jkaupp.github.io/DHQ/){preview-link="true"}
 
-И, разумеется, 
+И, разумеется,
 
-::: {.r-fit-text}
+::: r-fit-text
 Ю.М. Лотман
 :::
 
-## {.scrollable .smaller data-menu-title='Кластеры "теорий" в статьях DHQ'}
+##  {.scrollable .smaller data-menu-title="Кластеры \"теорий\" в статьях DHQ"}
+
 ![](images/DHQ_clusters.png)
 
 ::: aside
-Кластеризация эмбеддингов понятия 'теория' по алгоритму *k-means* в публикациях научных DH-изданий. См. Kleymann et al. *A Corpus-Based Study of ‘Theory’*
+Кластеризация эмбеддингов понятия 'теория' по алгоритму *k-means* в публикациях научных DH-изданий. См. Kleymann et al. *A Corpus-Based Study of 'Theory'*
 :::
 
 ## Beyond {.smaller}
-* [Terras, *Quantifying Digital Humanities*, 2012](https://www.ucl.ac.uk/infostudies/melissa-terras/DigitalHumanitiesInfographic.pdf){preview-link='true'}
-  - случайно нашел в процессе подготовки
-  - красивая инфографика
-* [Walsh et al. *Digital humanities in the iSchool*, 2021](https://asistdl.onlinelibrary.wiley.com/doi/10.1002/asi.24535)
-  - 13 человек в команде
-  - безупречный препроцессинг силлабусов
-  - topic modeling <- подтверждение валидности моих идей
-  - force-directed графы
+
+-   [Terras, *Quantifying Digital Humanities*, 2012](https://www.ucl.ac.uk/infostudies/melissa-terras/DigitalHumanitiesInfographic.pdf){preview-link="true"}
+    -   случайно нашел в процессе подготовки
+    -   красивая инфографика
+-   [Walsh et al. *Digital humanities in the iSchool*, 2021](https://asistdl.onlinelibrary.wiley.com/doi/10.1002/asi.24535)
+    -   13 человек в команде
+    -   безупречный препроцессинг силлабусов
+    -   topic modeling \<- подтверждение валидности моих идей
+    -   force-directed графы
 
 ## Технические детали презентации {.smaller}
 
-* презентация собрана в RStudio при помощи фреймворка [Quarto](https://quarto.org)
-  + значительную помощь при работе с Quarto оказали публикации Ивана Позднякова: 
-    - книга [Анализ данных и статистика в R](https://pozdniakov.github.io/tidy_stats/)
-    - репозиторий с примером [презентации Quarto](https://github.com/Pozdniakov/quarto_example/)
-* рендеринг в HTML при помощи фреймворка [Reveal.js](https://quarto.org/docs/presentations/revealjs/)
-* рендеринг датафреймов при помощи библиотек [kable и kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html), с дополнительной настройкой CSS
-* таймлайн и MSCW отрисованы вручную в Miro
-  + экспорт изображений из Miro ограничен форматом *pdf* для векторной выдачи
-  + конвертация *pdf* -> *svg* выполнена в [Inkscape](https://inkscape.org)
-  
-## {visibility='hidden'}
+-   презентация собрана в RStudio при помощи фреймворка [Quarto](https://quarto.org)
+    -   значительную помощь при работе с Quarto оказали публикации Ивана Позднякова:
+        -   книга [Анализ данных и статистика в R](https://pozdniakov.github.io/tidy_stats/)
+        -   репозиторий с примером [презентации Quarto](https://github.com/Pozdniakov/quarto_example/)
+-   рендеринг в HTML при помощи фреймворка [Reveal.js](https://quarto.org/docs/presentations/revealjs/)
+-   рендеринг датафреймов при помощи библиотек [kable и kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html), с дополнительной настройкой CSS
+-   таймлайн и MSCW отрисованы вручную в Miro
+    -   экспорт изображений из Miro ограничен форматом *pdf* для векторной выдачи
+    -   конвертация *pdf* -\> *svg* выполнена в [Inkscape](https://inkscape.org)
+
+##  {visibility="hidden"}
+
 ::: footer
 Посвящается памяти вечно любимой Н.В. Геташвили
 :::
