@@ -240,7 +240,7 @@ https://marinanastas.github.io/DH-disciplines-graph/
     -   состав курсов
     -   описание курсов
 
-## Датасет силлабусов
+## Датасет силлабусов {.smalle .scrollable}
 
 ```{r}
 df_syll <- read_csv('data/dh_syllabi.csv')
